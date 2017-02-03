@@ -29,7 +29,7 @@ class S3BackupServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $commands = [
-        Escuccim\S3Backup\BackupFile::class,
+        BackupFile::class,
     ];
 
     /**
