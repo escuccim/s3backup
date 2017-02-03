@@ -1,0 +1,30 @@
+{
+    "name": "escuccim/s3backup",
+    "description": "Laravel shell command to backup files to Amazon S3",
+    "keywords": [
+        "escuccim",
+        "Amazon S3",
+        "backup"
+    ],
+    "homepage": "https://github.com/escuccim/s3backup"
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Scuccimarra",
+            "email": "skooch@gmail.com",
+            "homepage": "http://ericscuccimarra.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "~5.3",
+        "php" : "~5.6|~7.0",
+        "aws/aws-sdk-php-laravel": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Escuccim\\S3Backup\\": "src"
+        }
+    }
+}
