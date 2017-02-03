@@ -50,7 +50,7 @@ class BackupFile extends Command
     	$s3->putObject(array(
     			'Bucket'     => env('AWS_BUCKET'),
     			'Key'        => $destination . '/' . $file,
-    			'SourceFile' => public_path() . '/' . $path . '/' . $file,
+    			'SourceFile' => base_path() . '/' . $path . '/' . $file,
     	));
     }
 }

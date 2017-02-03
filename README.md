@@ -22,7 +22,7 @@ Escuccim\S3Backup\S3BackupServiceProvider::class,
 ## Usage
 
 ``` php 
-artisan backup:file [filename] [--path=path to file relative to public] [--dest=location to upload file to]
+artisan backup:file [filename] [--path=path to file relative to base path] [--dest=location to upload file to]
 ```
 You must specify the credentials to your Amazon S3 bucket in your .env file as follows:
 ```
