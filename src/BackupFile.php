@@ -15,7 +15,7 @@ class BackupFile extends Command
      *
      * @var string
      */
-    protected $signature = 'backup:file {file} {--path=/} {--dest=/}';
+    protected $signature = 'backup:file {file} {--path=} {--dest=}';
 
     /**
      * The console command description.

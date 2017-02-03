@@ -6,7 +6,7 @@
         "Amazon S3",
         "backup"
     ],
-    "homepage": "https://github.com/escuccim/s3backup"
+    "homepage": "https://github.com/escuccim/s3backup",
     "type": "library",
     "license": "MIT",
     "authors": [

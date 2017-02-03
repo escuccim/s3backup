@@ -1,26 +1,56 @@
-# Laravel package to create console command to backup files to Amazon S3
+# S3Backup
 
-## Installation
-Requires aws/aws-sdk-php-laravel
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Total Downloads][ico-downloads]][link-downloads]
 
-Put this file in /app/Console/Commands
+This is a Laravel package that creates a console command to backup a file to Amazon S3.
 
-Register it in /app/Console/Kernel.php:
-```php
-protected $commands = [
-  Commands\BackupFile::class,
-];
+## Install
+
+Via Composer -
+
+``` bash
+$ composer require escuccim/s3backup
 ```
-Execute as php artisan backup:file [filename] --path=[path to file] --dest=[location to upload to] 
+Register the class in config/app.php 'providers' array:
+```
+Escuccim\S3Backup\S3BackupServiceProvider::class,
+```
 
-Note do not use leading or trailings /s in the path or the destination.
+## Usage
 
-It will upload the file to Amazon S3 in the specified location.
-
-You must have the S3 configuration in your .env file:
+``` php 
+artisan backup:file [filename] [--path=path to file relative to public] [--dest=location to upload file to]
+```
+You must specify the credentials to your Amazon S3 bucket in your .env file as follows:
+```
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_REGION=
 AWS_BUCKET=
+```
+You should not use trailing or leading /'s on your paths, and currently you can only upload one file at a time.
 
-I use this to dump and backup my DB. I have a cron job scheduled which dumps the DB and then executes this command to upload it.
+## Credits
+
+- [Eric Scuccimarra][link-author]
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-version]: https://img.shields.io/packagist/v/escuccim/s3backup.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/escuccim/s3backup/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/escuccim/s3backup.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/escuccim/s3backup.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/escuccim/s3backup.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/escuccim/s3backup
+[link-travis]: https://travis-ci.org/escuccim/s3backup
+[link-scrutinizer]: https://scrutinizer-ci.com/g/escuccim/s3backup/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/escuccim/s3backup
+[link-downloads]: https://packagist.org/packages/escuccim/s3backup
+[link-author]: https://github.com/escuccim
