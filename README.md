@@ -11,7 +11,7 @@ protected $commands = [
   Commands\BackupFile::class,
 ];
 ```
-Execute as php artisan backup:db [filename] --path=[path to file] --dest=[location to upload to] 
+Execute as php artisan backup:file [filename] --path=[path to file] --dest=[location to upload to] 
 
 Note do not use leading or trailings /s in the path or the destination.
 
