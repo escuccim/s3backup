@@ -1,4 +1,4 @@
-# Laravel command to backup files to Amazon S3
+# Laravel package to create console command to backup files to Amazon S3
 
 ## Installation
 Requires aws/aws-sdk-php-laravel
@@ -12,6 +12,8 @@ protected $commands = [
 ];
 ```
 Execute as php artisan backup:db [filename] --path=[path to file] --dest=[location to upload to] 
+
+Note do not use leading or trailings /s in the path or the destination.
 
 It will upload the file to Amazon S3 in the specified location.
 
