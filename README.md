@@ -31,7 +31,7 @@ AWS_SECRET_ACCESS_KEY=
 AWS_REGION=
 AWS_BUCKET=
 ```
-You should not use trailing or leading /'s on your paths, and currently you can only upload one file at a time.
+You should not use trailing or leading /'s on your paths, and currently you can only upload one file at a time. The file will be uploaded as the same filename, to the key specified in the destination path.
 
 ## Credits
 
