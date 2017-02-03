@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Aws\Laravel\AwsFacade as AWS;
 
-class BackupDB extends Command
+class BackupFiles extends Command
 {
     /**
      * The name and signature of the console command.
