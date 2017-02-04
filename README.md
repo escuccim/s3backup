@@ -18,12 +18,6 @@ Register the class in config/app.php 'providers' array:
 ```
 Escuccim\S3Backup\S3BackupServiceProvider::class,
 ```
-
-## Usage
-
-``` php 
-artisan backup:file [filename] [--path=path to file relative to base path] [--dest=location to upload file to]
-```
 You must specify the credentials to your Amazon S3 bucket in your .env file as follows:
 ```
 AWS_ACCESS_KEY_ID=
@@ -31,7 +25,19 @@ AWS_SECRET_ACCESS_KEY=
 AWS_REGION=
 AWS_BUCKET=
 ```
+
+## Usage
+### For Single Files
+``` bash 
+artisan backup:file [filename] [--path=path to file relative to base path] [--dest=location to upload file to]
+```
 You should not use trailing or leading /'s on your paths, and currently you can only upload one file at a time. The file will be uploaded as the same filename, to the key specified in the destination path.
+
+### For Directories
+```bash
+artisan backup:dir [path] [--dest=location to upload file to]
+```
+Where path is the path to the directory relative to the base path and dest is the base key to upload the files to. The final destination of the files will replace the path parameter with the dest parameter.
 
 ## Credits
 

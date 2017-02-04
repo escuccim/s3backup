@@ -53,7 +53,7 @@ class BackupDir extends Command
         // get the files in the dir
         $path = base_path() . '/' . $dir;
         $files = $this->getDirectoryContents($path);
- 
+
         // loop through and upload them
         foreach($files as $file){
             // strip out the base path
