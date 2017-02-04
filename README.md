@@ -35,9 +35,11 @@ You should not use trailing or leading /'s on your paths, and currently you can 
 
 ### For Directories
 ```bash
-artisan backup:dir [path] [--dest=location to upload file to]
+artisan backup:dir [path] [--dest=location to upload file to] [--ext=file extension]
 ```
 Where path is the path to the directory relative to the base path and dest is the base key to upload the files to. The final destination of the files will replace the path parameter with the dest parameter.
+
+If you specify a file extension only files matching that will be uploaded. 
 
 ## Credits
 
@@ -59,4 +61,4 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/escuccim/s3backup/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/escuccim/s3backup
 [link-downloads]: https://packagist.org/packages/escuccim/s3backup
-[link-author]: https://github.com/escuccim
+[link-author]: http://ericscuccimarra.com

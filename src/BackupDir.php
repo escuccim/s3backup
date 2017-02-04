@@ -15,7 +15,7 @@ class BackupDir extends Command
      *
      * @var string
      */
-    protected $signature = 'backup:dir {dir} {--dest=}';
+    protected $signature = 'backup:dir {dir} {--dest=} {--ext=}';
 
     /**
      * The console command description.
@@ -43,6 +43,7 @@ class BackupDir extends Command
     {
     	$dir = $this->argument('dir');
     	$destination = $this->option('dest');
+    	$extension = $this->option('ext');
 
     	$s3 = AWS::createClient('s3');
 
@@ -54,19 +55,38 @@ class BackupDir extends Command
         $path = base_path() . '/' . $dir;
         $files = $this->getDirectoryContents($path);
 
+        $counter = 0;
         // loop through and upload them
         foreach($files as $file){
-            // strip out the base path
-            $filePath = str_replace($path, '', $file);
-            echo "FILE: " . $file . "\n";
-            $destinationKey = $destination . $filePath;
-            $s3->putObject(array(
-                'Bucket'     => env('AWS_BUCKET'),
-                'Key'        => $destinationKey,
-                'SourceFile' => $path . '/' . $filePath,
-            ));
-        }
+            $uploadFile = true;
+            // if an extension was specified check if the file matches it
+            if($extension) {
+                $uploadFile = false;
+                // filter out files without extensions
+                $array = explode('/', $file);
+                $fileName = end($array);
 
+                if(strpos($fileName, '.')){
+                    $fileExtension = pathinfo($file)['extension'];
+                    if ($extension == $fileExtension)
+                        $uploadFile = true;
+                }
+            }
+
+            if($uploadFile) {
+                $counter++;
+                // strip out the base path
+                $filePath = str_replace($path, '', $file);
+
+                $destinationKey = $destination . $filePath;
+                $s3->putObject(array(
+                    'Bucket'     => env('AWS_BUCKET'),
+                    'Key'        => $destinationKey,
+                    'SourceFile' => $path . '/' . $filePath,
+                ));
+            }
+        }
+        echo $counter . " files uploaded.\n";
     }
 
     private function getDirectoryContents($path){
