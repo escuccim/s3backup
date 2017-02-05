@@ -15,7 +15,7 @@ class BackupFile extends Command
      *
      * @var string
      */
-    protected $signature = 'backup:file {file} {--path=} {--dest=}';
+    protected $signature = 'backup:file {file} {--dest=}';
 
     /**
      * The console command description.
@@ -43,14 +43,17 @@ class BackupFile extends Command
     {
     	$file = $this->argument('file');
     	$destination = $this->option('dest');
-    	$path = $this->option('path');
-    	
+
+    	// get file name
+        $path = explode('/', $file);
+        $fileName = end($path);
+
     	$s3 = AWS::createClient('s3');
     	
     	$s3->putObject(array(
     			'Bucket'     => env('AWS_BUCKET'),
-    			'Key'        => $destination . '/' . $file,
-    			'SourceFile' => base_path() . '/' . $path . '/' . $file,
+    			'Key'        => $destination . '/' . $fileName,
+    			'SourceFile' => base_path() . '/' . $file,
     	));
     }
 }

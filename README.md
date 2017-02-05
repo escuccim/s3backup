@@ -29,9 +29,12 @@ AWS_BUCKET=
 ## Usage
 ### For Single Files
 ``` bash 
-artisan backup:file [filename] [--path=path to file relative to base path] [--dest=location to upload file to]
+artisan backup:file [file] [--dest=location to upload file to]
 ```
-You should not use trailing or leading /'s on your paths, and currently you can only upload one file at a time. The file will be uploaded as the same filename, to the key specified in the destination path.
+
+{file} is the path to the file to upload relative to your project root. {dest} is the location to upload the file to. The file will keep the same name. 
+
+Do not use trailing or leading "/"s on either the file or the destination.
 
 ### For Directories
 ```bash
