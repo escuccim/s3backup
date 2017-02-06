@@ -55,5 +55,7 @@ class BackupFile extends Command
     			'Key'        => $destination . '/' . $fileName,
     			'SourceFile' => base_path() . '/' . $file,
     	));
+
+    	echo "1 file uploaded";
     }
 }
