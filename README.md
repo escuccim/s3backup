@@ -27,9 +27,23 @@ AWS_BUCKET=
 ```
 
 ## Usage
+### To Dump and Upload Database
+```bash
+php artisan backup:db {--path=location to dump to} {--dest=key to upload to} {--keep} {--usepass}
+```
+This will dump the database specified in your .env file to your /database/ directory, upload the dump to S3, and then delete it locally.
+
+Options:
+- path: by default the db will be dumped to your database directory, if you want to dump to a subdirectory specify this in path.
+- dest: the key to upload the file to in s3
+- keep: use this flag if you want to keep the dump file locally, otherwise it will be deleted after upload
+- usepass: use this flag if you want to use the password in your .env file when generating the dump. If you do not use this flag no password will be specified.
+
+The username specified in the .env file will be passed to mysqldump.
+
 ### For Single Files
 ``` bash 
-artisan backup:file [file] [--dest=location to upload file to]
+php artisan backup:file [file] [--dest=location to upload file to]
 ```
 
 {file} is the path to the file to upload relative to your project root. {dest} is the location to upload the file to. The file will keep the same name. 
@@ -38,7 +52,7 @@ Do not use trailing or leading "/"s on either the file or the destination.
 
 ### For Directories
 ```bash
-artisan backup:dir [path] [--dest=location to upload file to] [--ext=file extension]
+php artisan backup:dir [path] [--dest=location to upload file to] [--ext=file extension]
 ```
 Where path is the path to the directory relative to the base path and dest is the base key to upload the files to. The final destination of the files will replace the path parameter with the dest parameter.
 

@@ -31,6 +31,7 @@ class S3BackupServiceProvider extends ServiceProvider
     protected $commands = [
         BackupFile::class,
         BackupDir::class,
+        BackupDB::class,
     ];
 
     /**
