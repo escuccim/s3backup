@@ -29,17 +29,24 @@ AWS_BUCKET=
 ## Usage
 ### To Dump and Upload Database
 ```bash
-php artisan backup:db {--path=location to dump to} {--dest=key to upload to} {--keep} {--usepass}
+php artisan backup:db {--path=} {--db=} {--user=} {--dest=} {--keep} {--p} {--pass=}
 ```
 This will dump the database specified in your .env file to your /database/ directory, upload the dump to S3, and then delete it locally.
 
 Options:
 - path: by default the db will be dumped to your database directory, if you want to dump to a subdirectory specify this in path.
+- db: the name of the DB to dump, if you omit this it will use the DB from the .env file
+- user: the name of the user to use to dump, if you omit this it will use the username from the .env file
 - dest: the key to upload the file to in s3
 - keep: use this flag if you want to keep the dump file locally, otherwise it will be deleted after upload
-- usepass: use this flag if you want to use the password in your .env file when generating the dump. If you do not use this flag no password will be specified.
+- p: use this flag if you want to use the password in your .env file when generating the dump. If you do not use this flag no password will be specified.
+- pass: if you wish to use a password other than the one in the .env specify it here.
 
-The username specified in the .env file will be passed to mysqldump.
+All of these parameters are optional and if not specified defaults will be taken from the .env file.
+
+Note that --p is used to specify if you want to use a password at all, if you do not have a password for the local account or have credentials stored in a .my.cnf file you can omit this. 
+
+--pass= is used to specify a password, if you wish to use it you MUST use the --p flag as well. If you use --p with no password specified the password will be taken from the .env file.
 
 ### For Single Files
 ``` bash 

@@ -15,7 +15,7 @@ class BackupDB extends Command
      *
      * @var string
      */
-    protected $signature = 'backup:db {--path=} {--dest=} {--keep} {--usepass}';
+    protected $signature = 'backup:db {--path=} {--db=} {--user=} {--dest=} {--keep} {--p} {--pass=}';
 
     /**
      * The console command description.
@@ -42,12 +42,34 @@ class BackupDB extends Command
     public function handle()
     {
     	$destination = $this->option('dest');
+    	$db = $this->option('db');
+    	$user = $this->option('user');
         $path = $this->option('path');
         $keepFile = $this->option('keep');
-        $usePass = $this->option('usepass');
+        $pass = $this->option('pass');
+        $usePass = $this->option('p');
 
+        // add a trailing / to the end of destination, if provided
         if($destination)
             $destination .= '/';
+       
+        // if no db specified default if
+        if(!$db)
+            $db = env('DB_DATABASE');
+
+        // if no user specified default that
+        if(!$user)
+            $user = env('DB_USERNAME');
+
+        // check if we should use a password
+        if($usePass){
+            // if yes and none is provided get it from the .env file
+            if(is_null($pass)){
+                $password = env('DB_PASSWORD');
+            } else {
+                $password = $pass;
+            }
+        }
 
     	// get the db name
         $db = env('DB_DATABASE');
@@ -56,10 +78,10 @@ class BackupDB extends Command
         $name = $db . '_' . date('Y-m-d') . '.sql.gz';
         $backupLocation = database_path() . '/' . $path . '/' . $name;
 
-    	// dump the database
-        $command = 'mysqldump -u ' . env('DB_USERNAME') ;
+        // dump the database
+        $command = 'mysqldump -u ' . $user ;
         if($usePass){
-            $command .= ' -p' .  env('DB_PASSWORD');
+            $command .= ' -p' .  $password;
         }
         $command .=   ' --databases ' . $db . '| gzip > ' . $backupLocation;
         exec($command);
