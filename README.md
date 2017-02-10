@@ -71,7 +71,7 @@ If you specify a file extension only files matching that will be uploaded.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT).
 
 [ico-version]: https://img.shields.io/packagist/v/escuccim/s3backup.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
